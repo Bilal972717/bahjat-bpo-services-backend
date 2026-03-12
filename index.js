@@ -1,13 +1,13 @@
 // server.js
 const express = require('express');
-const stripe = require('stripe')('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');
+const stripe = require('stripe')('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');
 const cors = require('cors');
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-const YOUR_DOMAIN = "https://coretechbpo.vercel.app";
+const YOUR_DOMAIN = "https://bahjat-bpo-services.vercel.app/";
 
 app.post('/create-checkout-session', async (req, res) => {
   const { price, productName } = req.body;

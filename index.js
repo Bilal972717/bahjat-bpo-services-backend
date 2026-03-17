@@ -8,9 +8,9 @@ app.use(cors());
 
 const YOUR_DOMAIN = "https://bahjat-bpo-services.vercel.app/";
 
-// Simple GET route for root
+// Root route for health checks
 app.get('/', (req, res) => {
-  res.send('Bahjat BPO Services backend is running. Use POST /create-checkout-session');
+  res.send('Server is running. Use POST /create-checkout-session');
 });
 
 app.post('/create-checkout-session', async (req, res) => {
@@ -43,4 +43,5 @@ app.post('/create-checkout-session', async (req, res) => {
   }
 });
 
-app.listen(3000, () => console.log('Server running on port 3000'));
+// ✅ Export the app for Vercel (no app.listen)
+module.exports = app;

@@ -1,4 +1,3 @@
-// server.js
 const express = require('express');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const cors = require('cors');
@@ -9,13 +8,17 @@ app.use(cors());
 
 const YOUR_DOMAIN = "https://bahjat-bpo-services.vercel.app/";
 
+// Simple GET route for root
+app.get('/', (req, res) => {
+  res.send('Bahjat BPO Services backend is running. Use POST /create-checkout-session');
+});
+
 app.post('/create-checkout-session', async (req, res) => {
   const { price, productName } = req.body;
 
   try {
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['cashapp'],   // ✅ Cash App Only
-
+      payment_method_types: ['cashapp'],
       line_items: [
         {
           price_data: {
@@ -28,7 +31,6 @@ app.post('/create-checkout-session', async (req, res) => {
           quantity: 1,
         },
       ],
-
       mode: 'payment',
       success_url: `${YOUR_DOMAIN}`,
       cancel_url: `${YOUR_DOMAIN}`,

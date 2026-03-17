@@ -1,6 +1,6 @@
 // server.js
 const express = require('express');
-const stripe = require('stripe')('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');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const cors = require('cors');
 
 const app = express();
